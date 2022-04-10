@@ -24,11 +24,11 @@ services:
         platform: linux/x86_64
         image: mysql:8.0
         environment: 
-            MYSQL_DATABASE: main
-            MYSQL_USER: admin
-            MYSQL_ROOT: admin
-            MYSQL_PASSWORD: admin
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_ROOT: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
         volumes:
             - ./storage/dbdata:/var/lib/mysql
         ports:
