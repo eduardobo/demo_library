@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware;
+use App\Http\Middleware\HandleInertiaRequests;
 
 class Kernel extends HttpKernel
 {
