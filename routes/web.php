@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return ('welcome to the internet');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+
