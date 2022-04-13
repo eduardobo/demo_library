@@ -13,5 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/login', [App\Http\Controllers\Auth\AuthController::class, 'index'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login.save');
+
+Route::get('/sign-up', [App\Http\Controllers\Auth\AuthController::class, 'signUp'])->name('sign_up');
+Route::post('/sign-up', [App\Http\Controllers\Auth\AuthController::class, 'createAccouint'])->name('create_account');
+
+Route::post('/logout', [App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::group(['namespace '=> 'books', 'prefix' => 'books'], function() {
+        Route::get('', [App\Http\Controllers\BookController::class, 'index'])->name('index');
+        Route::get('{book}', [App\Http\Controllers\BookController::class, 'show'])->name('show');
+    });
+});
