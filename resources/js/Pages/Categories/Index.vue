@@ -55,7 +55,10 @@
                       <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                         <Link href="/categories/edit" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
 
-                        <Link href="/categories/delete" class="text-indigo-600 hover:text-indigo-900">Delete</Link>
+                        <Link :href="/categories/ + category.id" method="delete" 
+                            class="text-white px-1 bg-red-500 rounded ml-3" as="button">
+                            <i class="fa-solid fa-trash-can"></i>
+                          </Link>
                       </td>
                     </tr>
                     </tbody>
