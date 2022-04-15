@@ -10,7 +10,7 @@ class BookController extends Controller
 {
     public function index() {
         $books = Book::all();
-        return Inertia::render('Event/Show', [
+        return Inertia::render('Books/Index', [
             'books' => $books,
         ]);
     }

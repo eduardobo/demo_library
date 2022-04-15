@@ -24,8 +24,7 @@ Route::post('/sign-up', [App\Http\Controllers\Auth\AuthController::class, 'creat
 Route::post('/logout', [App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::group(['namespace '=> 'books', 'prefix' => 'books'], function() {
-        Route::get('', [App\Http\Controllers\BookController::class, 'index'])->name('index');
-        Route::get('{book}', [App\Http\Controllers\BookController::class, 'show'])->name('show');
-    });
+    Route::resource('books', App\Http\Controllers\BookController::class);
+
+    Route::resource('categories', App\Http\Controllers\CategoryController::class, ['execpt' => ['create', 'show']]);
 });
