@@ -22,6 +22,7 @@
                             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
                     {{ confirm }}
                   </button>
+
                   <button type="button" 
                       class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300
                               shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700
@@ -47,7 +48,7 @@ export default {
   props: ['show_modal', 'header', 'submit_url', 'method', 'confirm', 'cancel'],
   methods: {
     callParent() {
-      this.$emit('modalStatus', this.show_modal);
+      this.$emit('modalStatus', false);
     },
     submit(e) {
       let data = {};
@@ -57,7 +58,7 @@ export default {
         }
       }
 
-      this.$inertia['post'](this.submit_url,
+      this.$inertia[this.method](this.submit_url,
         data
       );
 

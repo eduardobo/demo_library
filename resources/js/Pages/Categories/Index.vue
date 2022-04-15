@@ -7,7 +7,7 @@
 
       <div class="lg:w-3/5 px-11 mx-auto md:w-full">
         <div class="mb-3 text-right w-full">
-          <a href="#" @click.prevent="adding_category: true; show_modal = true"><i class="fa-regular fa-square-plus text-size-3xl"></i> Add new category</a>
+          <a href="#" @click.prevent="prepareCreating"><i class="fa-regular fa-square-plus text-size-3xl"></i> Add new category</a>
         </div>
 
         <div class="flex flex-col">
@@ -53,10 +53,13 @@
                       </td>
 
                       <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                        <Link href="/categories/edit" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
+                        <button  class="bg-yellow-500 text-white rounded w-5 h-5 mr-3"
+                            @click="prepareEditing(category)">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
 
                         <Link :href="/categories/ + category.id" method="delete" 
-                            class="text-white px-1 bg-red-500 rounded ml-3" as="button">
+                            class="text-white bg-red-500 rounded w-5 h-5" as="button">
                             <i class="fa-solid fa-trash-can"></i>
                           </Link>
                       </td>
@@ -71,20 +74,20 @@
     </div>
 
     <FormModal :show_modal="show_modal" @modalStatus="updateModalStatus"
-        :submit_url="'/categories' + (adding_category ? '' : '/category_id')"
+        :submit_url="'/categories' + (adding_category ? '' : '/' + category_id)"
         :confirm="adding_category ? 'Create Category' : 'Update Category'"
         :header="adding_category ? 'Creating Category' : 'Updating Category'"
-        :method="adding_category ? 'post' : 'path'">
+        :method="adding_category ? 'post' : 'patch'">
       <div class="mb-6">
         <label class="mb-2 block font-bold text-xs text-slate-600" for="name">Name</label>
         <input name="name" id="name" type="text" class="rounded-xl p-2 border w-full"
-            required/>
+            required v-model="category_name"/>
       </div>
 
       <div class="mb-6">
         <label class="mb-2 block font-bold text-xs text-slate-600" for="description">Description</label>
         <input name="description" id="description" type="text" class="rounded-xl p-2 border w-full"
-            required/>
+            required v-model="category_description"/>
       </div>
     </FormModal>
 </template>
@@ -100,13 +103,32 @@ export default {
     data() {
       return {
         show_modal: false,
-        adding_category: true
+        adding_category: true,
+        category_id: '',
+        category_name: '',
+        category_description: ''
       }
     },
 
     methods: {
       updateModalStatus(estatus) {
         this.show_modal = estatus;
+      },
+      prepareEditing(category) {
+        this.category_id = category.id;
+        this.category_name = category.name;
+        this.category_description = category.description;
+
+        this.adding_category = false;
+        this.show_modal = true;
+      },
+      prepareCreating() {
+        this.category_id = '';
+        this.category_name = '';
+        this.category_description = '';
+
+        this.adding_category = true;
+        this.show_modal = true;
       }
     }
 }
