@@ -139,14 +139,14 @@ export default {
   data() {
     return {
       show_modal: false,
-      borrowing_user: '',
+      borrowing_user: null,
       book_id: null
     }
   },
 
   methods: {
     prepareEditing(book) {
-      this.borrowing_user = book.borrowing_user;
+      this.borrowing_user = book.borrowing_user_id;
       this.book_id = book.id;
 
       this.show_modal = true;
