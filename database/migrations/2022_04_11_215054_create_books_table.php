@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('borrowing_user_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('borrowing_user_id')->references('id')->on('users');
         });
     }

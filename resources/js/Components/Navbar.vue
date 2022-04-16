@@ -28,7 +28,7 @@
                             <Link href="/login" class="hover:underline">Log In</Link>
                         </li>
 
-                        <li v-if="isLogged">{{auth.user.name}} <i class="fa fa-user" aria-hidden="true"></i></li>
+                        <li v-if="isLogged"><i class="fa fa-user" aria-hidden="true"></i> {{auth.user.name}}</li>
 
                         <li v-if="isLogged">
                             <Link href="/logout" method="post" as="button" class="hover:underline">Log Out</Link>
