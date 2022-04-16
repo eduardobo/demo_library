@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,18 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/login', [App\Http\Controllers\Auth\AuthController::class, 'index'])->name('login');
-Route::post('/login', [App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login.save');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.save');
 
-Route::get('/sign-up', [App\Http\Controllers\Auth\AuthController::class, 'signUp'])->name('sign_up');
-Route::post('/sign-up', [App\Http\Controllers\Auth\AuthController::class, 'createAccouint'])->name('create_account');
+Route::get('/sign-up', [AuthController::class, 'signUp'])->name('sign_up');
+Route::post('/sign-up', [AuthController::class, 'createAccouint'])->name('create_account');
 
-Route::post('/logout', [App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('books', App\Http\Controllers\BookController::class, ['execpt' => ['show']]);
+    Route::resource('books', BookController::class, ['execpt' => ['show']]);
+    Route::post('books/{book}/borrowing_user', [BookController::class, 'updateBorrowingUser'])->name('books.borrowing_user');
 
-    Route::resource('categories', App\Http\Controllers\CategoryController::class, ['execpt' => ['create', 'show']]);
+    Route::resource('categories', CategoryController::class, ['execpt' => ['create', 'show']]);
 });

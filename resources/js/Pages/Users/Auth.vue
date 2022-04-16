@@ -58,6 +58,12 @@
                         <span>Not account? <Link href="/sign-up" class="text-blue-500 hover:underline">Create one</Link></span>
                     </div>
 
+                    <div class="w-full mb-2" v-if="!isLogin">
+                        <span>You already have an account?
+                            <Link href="/login" class="text-blue-500 hover:underline">Log in!</Link>
+                        </span>
+                    </div>
+
                     <div class="text-right">
                         <button class="bg-blue-500 text-white rounded py-2 px-4 hove:bg-blue-500"
                             type="submit"
@@ -67,7 +73,6 @@
             </div>
         </form>
     </div>
-    
 </template>
 
 <script>
@@ -109,4 +114,4 @@ export default {
         }
     }
 }
-</script>Navbar
+</script>

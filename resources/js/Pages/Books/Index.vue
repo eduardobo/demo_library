@@ -75,8 +75,14 @@
                           </td>
 
                           <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">
+                            <div class="text-sm text-gray-900 inline-block mr-3">
                               {{ book.user ? book.user.name : 'Not Borrowed' }}
+                            </div>
+
+                            <div class="inline-block">
+                              <button class="rounded w-5 h-5" @click="prepareEditing(book)">
+                                <i class="fa-solid fa-pen"></i>
+                              </button>
                             </div>
                           </td>
 
@@ -103,12 +109,48 @@
           </div>
         </div>
     </div>
+
+
+    <ModalForm :show_modal="show_modal" @modal_form_status="show_modal = false"
+        :submit_url="'/books/' + book_id + '/borrowing_user'"
+        :confirm="'Save'"
+        :header="'Update Borrowing user'"
+        :method="'post'">
+      <div>
+        <select name="borrowing_user" id="borrowing_user" class="p-2 border w-full rounded"
+            v-model="borrowing_user">
+          <option value="">No borrow</option>
+
+          <option v-for="user of users" :key="user.id" :value="user.id" v-text="user.name"></option>
+        </select>
+      </div>
+    </ModalForm>
 </template>
 
 <script>
-import Navbar from '../../Components/Navbar.vue'
+import Navbar from '../../Components/Navbar.vue';
+import ModalForm from '../../Components/ModalForm.vue';
+
 export default {
-  components: { Navbar },
-  props: ['books']
+  components: { Navbar, ModalForm },
+
+  props: ['books', 'users'],
+
+  data() {
+    return {
+      show_modal: false,
+      borrowing_user: '',
+      book_id: null
+    }
+  },
+
+  methods: {
+    prepareEditing(book) {
+      this.borrowing_user = book.borrowing_user;
+      this.book_id = book.id;
+
+      this.show_modal = true;
+    },
+  }
 }
 </script>

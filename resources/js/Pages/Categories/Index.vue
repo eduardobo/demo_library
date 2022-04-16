@@ -73,7 +73,7 @@
       </div>
     </div>
 
-    <FormModal :show_modal="show_modal" @form_modal_status="updateModalStatus"
+    <ModalForm :show_modal="show_modal" @modal_form_status="updateModalStatus"
         :submit_url="'/categories' + (adding_category ? '' : '/' + category_id)"
         :confirm="adding_category ? 'Create Category' : 'Update Category'"
         :header="adding_category ? 'Creating Category' : 'Updating Category'"
@@ -90,20 +90,21 @@
       <div class="mb-6">
         <label class="mb-2 block font-bold text-xs text-slate-600" for="description">Description</label>
         
-        <input name="description" id="description" type="text" class="rounded-xl p-2 border w-full"
+        <textarea name="description" id="description" type="text" class="rounded-xl p-2 border w-full"
+            style="resize:none"
             required v-model="category_description"/>
 
         <div class="mt-1 text-red-500 text-xs" v-text="errors.description"></div>
       </div>
-    </FormModal>
+    </ModalForm>
 </template>
 
 <script>
 import Navbar from '../../Components/Navbar.vue';
-import FormModal from '../../Components/FormModal.vue';
+import ModalForm from '../../Components/ModalForm.vue';
 
 export default {
-  components: { Navbar, FormModal},
+  components: { Navbar, ModalForm},
 
   props: ['categories'], 
 

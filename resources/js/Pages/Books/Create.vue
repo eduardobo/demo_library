@@ -50,7 +50,7 @@
                 <label for="borrowing_user" class="mb-2 block font-bold text-xs text-slate-600">Borrowing user</label>
 
                 <select class="p-2 border w-full rounded" v-model="book.borrowing_user">
-                  <option value="" selected>Select a borrowing_user</option>
+                  <option value="" selected>Select a borrowing user</option>
                   <option v-for="user in users"
                       :key="user.id" :value="user.id" v-text="user.name"></option>
                 </select>

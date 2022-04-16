@@ -14,8 +14,11 @@ class BookController extends Controller
         $books = Book::all();
         $books->load('category', 'user');
 
+        $users = User::all();
+
         return Inertia::render('Books/Index', [
             'books' => $books,
+            'users' => $users
         ]);
     }
 
@@ -84,6 +87,12 @@ class BookController extends Controller
 
     public function destroy(Book $book) {
         $book->delete();
+
+        return redirect()->route('books.index');
+    }
+
+    public function updateBorrowingUser(Request $request, Book $book) {
+        $book->update(['borrowing_user_id' => $request->get('borrowing_user')]);
 
         return redirect()->route('books.index');
     }
