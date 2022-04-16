@@ -13,12 +13,16 @@
                 <label for="name" class="mb-2 block font-bold text-xs text-slate-600">Name *</label>
 
                 <input name="name" id="name" type="text" class="p-2 border w-full rounded" v-model="book.name"/>
+
+                <div class="mt-1 text-red-500 text-xs" v-text="errors.name"></div>
               </div>
 
               <div class="mb-3">
                 <label for="author" class="mb-2 block font-bold text-xs text-slate-600">Author *</label>
 
                 <input name="author" id="author" type="text" class="p-2 border w-full rounded" v-model="book.author"/>
+
+                <div class="mt-1 text-red-500 text-xs" v-text="errors.author"></div>
               </div>
 
               <div class="mb-3">
@@ -29,6 +33,8 @@
                   <option v-for="category in categories"
                       :key="category.id" :value="category.id" v-text="category.name"></option>
                 </select>
+
+                <div class="mt-1 text-red-500 text-xs" v-text="errors.category_id"></div>
               </div>
 
               <div class="mb-3">
@@ -36,6 +42,8 @@
 
                 <input name="publication_date" id="publication_date" type="date"
                     class="p-2 border w-full rounded" v-model="book.publication_date"/>
+
+                <div class="mt-1 text-red-500 text-xs" v-text="errors.publication_date"></div>
               </div>
 
               <div class="mb-3">
@@ -46,6 +54,8 @@
                   <option v-for="user in users"
                       :key="user.id" :value="user.id" v-text="user.name"></option>
                 </select>
+
+                <div class="mt-1 text-red-500 text-xs" v-text="errors.publication_date"></div>
               </div>
 
               <div class="text-right">
@@ -67,7 +77,9 @@ import Navbar from '../../Components/Navbar.vue';
 
 export default {
   components: { Navbar },
+  
   props: ['book', 'categories', 'users'],
+
   methods: {
     submit() {
       let method = this.book.id ? 'patch' : 'post';
@@ -81,6 +93,12 @@ export default {
         borrowing_user: this.book.borrowing_user,
       });
     }
+  },
+
+  computed: {
+      errors() {
+          return this.$page.props.errors;
+      }
   }
 }
 </script>
