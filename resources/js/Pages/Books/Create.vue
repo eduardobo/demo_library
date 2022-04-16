@@ -59,7 +59,7 @@
               </div>
 
               <div class="text-right">
-                <button type="button" class="rounded py-2 px-4 hover:bg-gray-100 border mr-3">Cancel</button>
+                <Link href="/books" as="button" class="rounded py-2 px-4 hover:bg-gray-100 border mr-3">Cancel</Link>
 
                 <button type="submit"
                     class="bg-green-600 text-white rounded py-2 px-4 hover:bg-green-700">

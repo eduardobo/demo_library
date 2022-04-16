@@ -15,11 +15,6 @@
                 <div class="w-full">
                     <ul class="flex flex-row justify-between">
                         <li>
-                            <Link href="/" class="hover:underline" 
-                                :class="{'font-bold underline' : $page.component === 'Home'}">Home</Link>
-                        </li>
-
-                        <li>
                             <Link href="/books" class="hover:underline"
                                 :class="{'font-bold underline' : $page.component === 'Books'}">Books</Link>
                         </li>

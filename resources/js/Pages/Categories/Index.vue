@@ -1,7 +1,7 @@
 <template>
   <navbar></navbar>
     <div>
-      <div class="mx-auto w-full text-center mb-7">
+      <div class="mx-auto w-full text-center mb-7 mt-4">
         <h1 class="text-2xl">Categories</h1>
       </div>
 
@@ -80,56 +80,71 @@
         :method="adding_category ? 'post' : 'patch'">
       <div class="mb-6">
         <label class="mb-2 block font-bold text-xs text-slate-600" for="name">Name</label>
+
         <input name="name" id="name" type="text" class="rounded-xl p-2 border w-full"
             required v-model="category_name"/>
+
+        <div class="mt-1 text-red-500 text-xs" v-text="errors.name"></div>
       </div>
 
       <div class="mb-6">
         <label class="mb-2 block font-bold text-xs text-slate-600" for="description">Description</label>
+        
         <input name="description" id="description" type="text" class="rounded-xl p-2 border w-full"
             required v-model="category_description"/>
+
+        <div class="mt-1 text-red-500 text-xs" v-text="errors.description"></div>
       </div>
     </FormModal>
 </template>
 
 <script>
-import Navbar from '../../Components/Navbar.vue'
-import FormModal from '../../Components/FormModal.vue'
+import Navbar from '../../Components/Navbar.vue';
+import FormModal from '../../Components/FormModal.vue';
+
 export default {
-    components: { Navbar, FormModal},
+  components: { Navbar, FormModal},
 
-    props: ['categories'], 
+  props: ['categories'], 
 
-    data() {
-      return {
-        show_modal: false,
-        adding_category: true,
-        category_id: '',
-        category_name: '',
-        category_description: ''
-      }
+  data() {
+    return {
+      show_modal: false,
+      adding_category: true,
+      category_id: '',
+      category_name: '',
+      category_description: ''
+    }
+  },
+
+  methods: {
+    updateModalStatus(estatus) {
+      this.show_modal = estatus;
     },
 
-    methods: {
-      updateModalStatus(estatus) {
-        this.show_modal = estatus;
-      },
-      prepareEditing(category) {
-        this.category_id = category.id;
-        this.category_name = category.name;
-        this.category_description = category.description;
+    prepareEditing(category) {
+      this.category_id = category.id;
+      this.category_name = category.name;
+      this.category_description = category.description;
 
-        this.adding_category = false;
-        this.show_modal = true;
-      },
-      prepareCreating() {
-        this.category_id = '';
-        this.category_name = '';
-        this.category_description = '';
+      this.adding_category = false;
+      this.show_modal = true;
+    },
 
-        this.adding_category = true;
-        this.show_modal = true;
-      }
+    prepareCreating() {
+      this.category_id = '';
+      this.category_name = '';
+      this.category_description = '';
+
+      this.adding_category = true;
+      this.show_modal = true;
     }
+  },
+
+  computed: {
+    errors() {
+        return this.$page.props.errors;
+    }
+  }
 }
 </script>Navbar

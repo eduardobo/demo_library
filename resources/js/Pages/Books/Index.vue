@@ -3,7 +3,7 @@
         <navbar></navbar>
 
         <div>
-          <div class="mx-auto w-full text-center mb-7">
+          <div class="mx-auto w-full text-center mb-7 mt-4">
             <h1 class="text-2xl">Books</h1>
           </div>
 
