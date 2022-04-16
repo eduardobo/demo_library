@@ -60,8 +60,8 @@
 
                         <Link :href="/categories/ + category.id" method="delete" 
                             class="text-white bg-red-500 rounded w-5 h-5" as="button">
-                            <i class="fa-solid fa-trash-can"></i>
-                          </Link>
+                          <i class="fa-solid fa-trash-can"></i>
+                        </Link>
                       </td>
                     </tr>
                     </tbody>
@@ -73,7 +73,7 @@
       </div>
     </div>
 
-    <FormModal :show_modal="show_modal" @modalStatus="updateModalStatus"
+    <FormModal :show_modal="show_modal" @form_modal_status="updateModalStatus"
         :submit_url="'/categories' + (adding_category ? '' : '/' + category_id)"
         :confirm="adding_category ? 'Create Category' : 'Update Category'"
         :header="adding_category ? 'Creating Category' : 'Updating Category'"

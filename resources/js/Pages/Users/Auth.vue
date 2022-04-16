@@ -71,9 +71,8 @@
 </template>
 
 <script>
-import Navbar from '../../Components/Navbar.vue'
+import Navbar from '../../Components/Navbar.vue';
 import { Head } from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia'
 
 export default {
     components: {Navbar, Head},

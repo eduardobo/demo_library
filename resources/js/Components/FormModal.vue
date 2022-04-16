@@ -48,7 +48,7 @@ export default {
   props: ['show_modal', 'header', 'submit_url', 'method', 'confirm', 'cancel'],
   methods: {
     callParent() {
-      this.$emit('modalStatus', false);
+      this.$emit('form_modal_status', false);
     },
     submit(e) {
       let data = {};
