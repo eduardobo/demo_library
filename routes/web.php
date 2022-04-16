@@ -24,7 +24,7 @@ Route::post('/sign-up', [App\Http\Controllers\Auth\AuthController::class, 'creat
 Route::post('/logout', [App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('books', App\Http\Controllers\BookController::class);
+    Route::resource('books', App\Http\Controllers\BookController::class, ['execpt' => ['show']]);
 
     Route::resource('categories', App\Http\Controllers\CategoryController::class, ['execpt' => ['create', 'show']]);
 });
