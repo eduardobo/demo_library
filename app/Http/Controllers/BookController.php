@@ -10,10 +10,14 @@ use Inertia\Inertia;
 
 class BookController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $booksPage = Book::select('id', 'name', 'author', 'publication_date', 'category_id', 'borrowing_user_id')
+        ->when($request->input('search'), function($query, $search) {
+            $query->Where('name', 'like', "%{$search}%");
+        })
         ->with(['category:id,name', 'user:id,name'])
-        ->paginate(10);
+        ->paginate(10)
+        ->withQueryString();
 
         $users = User::all();
 

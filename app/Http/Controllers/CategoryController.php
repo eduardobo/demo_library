@@ -15,7 +15,8 @@ class CategoryController extends Controller
             $query->where('description', 'like', "%{$search}%")
                 ->orWhere('name', 'like', "%{$search}%");
         })
-        ->paginate(10);
+        ->paginate(10)
+        ->withQueryString();
 
         return Inertia::render('Categories/Index', [
             'categoriesPage' => $categories

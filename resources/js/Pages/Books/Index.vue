@@ -9,7 +9,16 @@
 
           <div class="w-full px-11">
             <div class="mb-3 text-right w-full">
-              <Link href="/books/create" class="hover:text-blue-600"><i class="fa-regular fa-square-plus text-size-3xl"></i> Add new book</Link>
+              <div>
+                <Link href="/books/create" class="hover:text-blue-600">
+                  <i class="fa-regular fa-square-plus text-size-3xl"></i> Add new book
+                </Link>
+              </div>
+
+              <div class="mt-3">
+                <input type="text" name="search" id="search" v-model="search"
+                  class="rounded-xl" placeholder="Search book"/>
+              </div>
             </div>
 
             <div class="flex flex-col">
@@ -133,6 +142,7 @@
 import Navbar from '../../Components/Navbar.vue';
 import ModalForm from '../../Components/ModalForm.vue';
 import Pagination from '../../Components/Pagination.vue';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
   components: { Navbar, ModalForm, Pagination},
@@ -143,7 +153,8 @@ export default {
     return {
       show_modal: false,
       borrowing_user: null,
-      book_id: null
+      book_id: null,
+      search: ''
     }
   },
 
@@ -159,6 +170,16 @@ export default {
 
   mounted() {
     console.log(this.booksPage);
+  },
+
+  watch: {
+      search(newValue, oldValue) {
+        Inertia.get('/books', {
+            search: newValue
+          }, {
+            preserveState: true
+        });
+  }
   }
 }
 </script>

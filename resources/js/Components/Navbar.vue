@@ -7,10 +7,6 @@
                 </Link>
             </div>
 
-            <form id="searcher" class="w-2/6">
-                <input class="w-full rounded-xl" type="text" placeholder="Search a book or a category"/>
-            </form>
-
             <div id="links" class="flex flex-row w-2/6 justify-between">
                 <div class="w-full">
                     <ul class="flex flex-row justify-between">
