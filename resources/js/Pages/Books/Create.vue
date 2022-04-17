@@ -80,6 +80,10 @@ export default {
   
   props: ['book', 'categories', 'users'],
 
+  mounted() {
+    this.book.borrowing_user = this.book.borrowing_user ?? '';
+  },
+
   methods: {
     submit() {
       let method = this.book.id ? 'patch' : 'post';

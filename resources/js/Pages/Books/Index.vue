@@ -47,7 +47,7 @@
                       </thead>
 
                       <tbody class="bg-white divide-y divide-gray-200">
-                        <tr v-for="book of books" :key="book.id">
+                        <tr v-for="book in booksPage.data" :key="book.id">
                           <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                               <div class="ml-4">
@@ -106,6 +106,15 @@
                 </div>
               </div>
             </div>
+
+            <div class="mt-3 mb-5 text-right">
+              <template v-for="link of booksPage.links" :key="link.label">
+                <Link v-if="link.url" v-html="link.label" :href="link.url" class="mr-3" 
+                  :class="link.active ? ' underline' : ''"></Link>
+
+                <span v-else v-html="link.label" class="text-gray-400 mr-3"></span>
+              </template>
+            </div>
           </div>
         </div>
     </div>
@@ -134,7 +143,7 @@ import ModalForm from '../../Components/ModalForm.vue';
 export default {
   components: { Navbar, ModalForm },
 
-  props: ['books', 'users'],
+  props: ['booksPage', 'users'],
 
   data() {
     return {
@@ -146,11 +155,16 @@ export default {
 
   methods: {
     prepareEditing(book) {
-      this.borrowing_user = book.borrowing_user_id;
+      console.log(book.borrowing_user_id);
+      this.borrowing_user = book.borrowing_user_id??'';
       this.book_id = book.id;
 
       this.show_modal = true;
     },
+  },
+
+  mounted() {
+    console.log(this.booksPage);
   }
 }
 </script>

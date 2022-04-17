@@ -11,25 +11,15 @@ use Inertia\Inertia;
 class BookController extends Controller
 {
     public function index() {
-        $books = Book::all();
-        $books->load('category', 'user');
+        $booksPage = Book::select('id', 'name', 'author', 'publication_date', 'category_id', 'borrowing_user_id')
+        ->with(['category:id,name', 'user:id,name'])
+        ->paginate(10);
 
         $users = User::all();
 
         return Inertia::render('Books/Index', [
-            'books' => $books,
+            'booksPage' => $booksPage,
             'users' => $users
-        ]);
-    }
-
-    public function show(Book $book) {
-        return Inertia::render('Event/Show', [
-            'book' => $book->only(
-                'id',
-                'title',
-                'start_date',
-                'description'
-            ),
         ]);
     }
 

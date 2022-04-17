@@ -19391,6 +19391,11 @@ __webpack_require__.r(__webpack_exports__);
     Navbar: _Components_Navbar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ['book', 'categories', 'users'],
+  mounted: function mounted() {
+    var _this$book$borrowing_;
+
+    this.book.borrowing_user = (_this$book$borrowing_ = this.book.borrowing_user) !== null && _this$book$borrowing_ !== void 0 ? _this$book$borrowing_ : '';
+  },
   methods: {
     submit: function submit() {
       var method = this.book.id ? 'patch' : 'post';
@@ -19433,20 +19438,26 @@ __webpack_require__.r(__webpack_exports__);
     Navbar: _Components_Navbar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     ModalForm: _Components_ModalForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['books', 'users'],
+  props: ['booksPage', 'users'],
   data: function data() {
     return {
       show_modal: false,
-      borrowing_user: '',
+      borrowing_user: null,
       book_id: null
     };
   },
   methods: {
     prepareEditing: function prepareEditing(book) {
-      this.borrowing_user = book.borrowing_user;
+      var _book$borrowing_user_;
+
+      console.log(book.borrowing_user_id);
+      this.borrowing_user = (_book$borrowing_user_ = book.borrowing_user_id) !== null && _book$borrowing_user_ !== void 0 ? _book$borrowing_user_ : '';
       this.book_id = book.id;
       this.show_modal = true;
     }
+  },
+  mounted: function mounted() {
+    console.log(this.booksPage);
   }
 });
 
@@ -20198,13 +20209,18 @@ var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_32 = {
+  "class": "mt-3 mb-5 text-right"
+};
+var _hoisted_33 = ["innerHTML"];
+
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: ""
 }, "No borrow", -1
 /* HOISTED */
 );
 
-var _hoisted_33 = ["value", "textContent"];
+var _hoisted_35 = ["value", "textContent"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_navbar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("navbar");
 
@@ -20222,7 +20238,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.books, function (book) {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.booksPage.data, function (book) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: book.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.name), 1
@@ -20271,7 +20287,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["href"])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalForm, {
+  ))])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.booksPage.links, function (link) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      key: link.label
+    }, [link.url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
+      key: 0,
+      innerHTML: link.label,
+      href: link.url,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mr-3", link.active ? ' underline' : ''])
+    }, null, 8
+    /* PROPS */
+    , ["innerHTML", "href", "class"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+      key: 1,
+      innerHTML: link.label,
+      "class": "text-gray-400 mr-3"
+    }, null, 8
+    /* PROPS */
+    , _hoisted_33))], 64
+    /* STABLE_FRAGMENT */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalForm, {
     show_modal: $data.show_modal,
     onModal_form_status: _cache[1] || (_cache[1] = function ($event) {
       return $data.show_modal = false;
@@ -20289,14 +20326,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.borrowing_user = $event;
         })
-      }, [_hoisted_32, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.users, function (user) {
+      }, [_hoisted_34, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.users, function (user) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
           key: user.id,
           value: user.id,
           textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.name)
         }, null, 8
         /* PROPS */
-        , _hoisted_33);
+        , _hoisted_35);
       }), 128
       /* KEYED_FRAGMENT */
       ))], 512
