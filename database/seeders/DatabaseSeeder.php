@@ -16,9 +16,15 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
 
+        DB::table('users')->insert([
+            'name' => 'Test',
+            'email' => 'user@test.com' ,
+            'password' => bcrypt('secret')
+        ]);
+
         $this->call([
-            BooksSeeder::class,
             CategoriesSeeder::class,
+            BooksSeeder::class,
         ]);
     }
 }
