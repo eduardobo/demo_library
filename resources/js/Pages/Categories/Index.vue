@@ -115,6 +115,7 @@ import Navbar from '../../Components/Navbar.vue';
 import ModalForm from '../../Components/ModalForm.vue';
 import Pagination from '../../Components/Pagination.vue';
 import { Inertia } from '@inertiajs/inertia';
+import throttle from 'lodash/throttle';
 
 export default {
   components: { Navbar, ModalForm, Pagination},
@@ -167,12 +168,16 @@ export default {
   },
 
   watch: {
-    search(newValue, oldValue) {
-        Inertia.get('/categories', {
-          search: newValue
-        }, {
-          preserveState: true
-        });
+    search: {
+      handler: throttle(function () {
+          Inertia.get('/categories', {
+              search: this.search
+            }, {
+              preserveState: true,
+              replace: true
+          });
+
+        }, 500),
     }
   }
 }
