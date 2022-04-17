@@ -21,5 +21,6 @@ What happened to me is the db container wasn't up.
 7. Enter to the app container to run the migrations and seeders with _docker-compose exec main bash_
 8. Run the migrations _php artisan migrate_
 9. Run seeders to have some entries on the app with _php artisan db:seed_
-10. Log in with the user _user@test.com_ password: _secret_ or create a new user.
-11. Navigate through the app, on the next url [http://localhost:8000/](http://localhost:8000/)
+10. Run _npm run prod_ to compile all the js files
+11. Log in with the user _user@test.com_ password: _secret_ or create a new user.
+12. Navigate through the app, on the next url [http://localhost:8000/](http://localhost:8000/)
