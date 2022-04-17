@@ -8,12 +8,17 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::query()
+        ->when($request->input('search'), function($query, $search) {
+            $query->where('description', 'like', "%{$search}%")
+                ->orWhere('name', 'like', "%{$search}%");
+        })
+        ->paginate(10);
 
         return Inertia::render('Categories/Index', [
-            'categories' => $categories
+            'categoriesPage' => $categories
         ]);
     }
 

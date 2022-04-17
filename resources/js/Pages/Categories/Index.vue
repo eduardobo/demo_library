@@ -6,8 +6,17 @@
       </div>
 
       <div class="lg:w-3/5 px-11 mx-auto md:w-full">
-        <div class="mb-3 text-right w-full">
-          <a href="#" @click.prevent="prepareCreating"><i class="fa-regular fa-square-plus text-size-3xl"></i> Add new category</a>
+        <div class="mb-2 text-right w-full">
+          <div>
+            <a href="#" @click.prevent="prepareCreating">
+              <i class="fa-regular fa-square-plus text-size-3xl"></i> Add new category
+            </a>
+          </div>
+
+          <div class="mt-3">
+            <input type="text" name="search" id="search" v-model="search"
+              class="rounded-xl" placeholder="Search category"/>
+          </div>
         </div>
 
         <div class="flex flex-col">
@@ -35,7 +44,7 @@
                   </thead>
 
                   <tbody class="bg-white divide-y divide-gray-200">
-                    <tr v-for="category of categories" :key="category.id">
+                    <tr v-for="category of categoriesPage.data" :key="category.id">
                       <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="ml-4">
@@ -70,6 +79,8 @@
             </div>
           </div>
         </div>
+
+        <Pagination :page="categoriesPage"></Pagination>
       </div>
     </div>
 
@@ -102,11 +113,17 @@
 <script>
 import Navbar from '../../Components/Navbar.vue';
 import ModalForm from '../../Components/ModalForm.vue';
+import Pagination from '../../Components/Pagination.vue';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
-  components: { Navbar, ModalForm},
+  components: { Navbar, ModalForm, Pagination},
 
-  props: ['categories'], 
+  mounted() {
+    console.log(this.categoriesPage);
+  },
+
+  props: ['categoriesPage'], 
 
   data() {
     return {
@@ -114,7 +131,8 @@ export default {
       adding_category: true,
       category_id: '',
       category_name: '',
-      category_description: ''
+      category_description: '',
+      search: ''
     }
   },
 
@@ -145,6 +163,16 @@ export default {
   computed: {
     errors() {
         return this.$page.props.errors;
+    }
+  },
+
+  watch: {
+    search(newValue, oldValue) {
+        Inertia.get('/categories', {
+          search: newValue
+        }, {
+          preserveState: true
+        });
     }
   }
 }
