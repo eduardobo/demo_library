@@ -23,7 +23,8 @@ class BookController extends Controller
 
         return Inertia::render('Books/Index', [
             'booksPage' => $booksPage,
-            'users' => $users
+            'users' => $users,
+            'filters' => $request->only('search')
         ]);
     }
 

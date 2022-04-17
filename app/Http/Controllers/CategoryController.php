@@ -19,7 +19,8 @@ class CategoryController extends Controller
         ->withQueryString();
 
         return Inertia::render('Categories/Index', [
-            'categoriesPage' => $categories
+            'categoriesPage' => $categories,
+            'filters' => $request->only('search')
         ]);
     }
 

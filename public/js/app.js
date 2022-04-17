@@ -19460,7 +19460,7 @@ __webpack_require__.r(__webpack_exports__);
     ModalForm: _Components_ModalForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Pagination: _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  props: ['booksPage', 'users'],
+  props: ['booksPage', 'users', 'filters'],
   data: function data() {
     return {
       show_modal: false,
@@ -19480,7 +19480,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log(this.booksPage);
+    this.search = this.filters.search;
   },
   watch: {
     search: function search(newValue, oldValue) {
@@ -19520,10 +19520,10 @@ __webpack_require__.r(__webpack_exports__);
     ModalForm: _Components_ModalForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Pagination: _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  props: ['categoriesPage', 'filters'],
   mounted: function mounted() {
-    console.log(this.categoriesPage);
+    this.search = this.filters.search;
   },
-  props: ['categoriesPage'],
   data: function data() {
     return {
       show_modal: false,

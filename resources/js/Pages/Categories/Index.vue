@@ -119,11 +119,11 @@ import { Inertia } from '@inertiajs/inertia';
 export default {
   components: { Navbar, ModalForm, Pagination},
 
-  mounted() {
-    console.log(this.categoriesPage);
-  },
+  props: ['categoriesPage', 'filters'], 
 
-  props: ['categoriesPage'], 
+  mounted() {
+    this.search = this.filters.search;
+  },
 
   data() {
     return {

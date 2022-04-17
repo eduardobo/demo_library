@@ -147,7 +147,7 @@ import { Inertia } from '@inertiajs/inertia';
 export default {
   components: { Navbar, ModalForm, Pagination},
 
-  props: ['booksPage', 'users'],
+  props: ['booksPage', 'users', 'filters'],
 
   data() {
     return {
@@ -169,7 +169,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.booksPage);
+    this.search = this.filters.search;
   },
 
   watch: {
